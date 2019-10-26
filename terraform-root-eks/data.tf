@@ -2,7 +2,7 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
 
   config = {
-    bucket         = "terraform-infra-poc"
+    bucket         = "terraform-swalloow"
     key            = "terraform-root-vpc/tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
@@ -14,7 +14,7 @@ data "terraform_remote_state" "iam" {
   backend = "s3"
 
   config = {
-    bucket         = "terraform-infra-poc"
+    bucket         = "terraform-swalloow"
     key            = "terraform-root-iam/tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
