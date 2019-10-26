@@ -1,11 +1,11 @@
 # k8s-jupyter-hub
 
-## Preparation 
+## Preparation
 
 - [x] `k8s.efs-volume.yaml` 파일 내의 `{EFS-ID}` 값을 수정 ([AWS EFS Console](https://ap-northeast-2.console.aws.amazon.com/efs/home?region=ap-northeast-2#/filesystems))
 
 ```bash
-# Jupyter Hub 를 위한 EBS, EFS k8s 리소스를 생성 
+# Jupyter Hub 를 위한 EBS, EFS k8s 리소스를 생성
 ./jupyter.helm-prepare.sh
 ```
 
@@ -20,7 +20,7 @@
 # jupyterhub helm chart 설치
 ./jupyter.helm-install.sh
 
-# jupyter hub pod 들이 생성되고 있는지 확인 
+# jupyter hub pod 들이 생성되고 있는지 확인
 kubectl get pods -n jupyter-production -w
 
 # 로드밸런서 DNS 확인
@@ -34,9 +34,11 @@ proxy-public   LoadBalancer   172.20.50.70   XXX-YYYY.ap-northeast-2.elb.amazona
 
 초기 사용자 / 패스워드는 `1ambda / mypassword` 입니다. 변경을 원하면 [jupyter.helm-config.yaml](https://github.com/1ambda/terraform-aws-eks-jupyterhub/blob/master/k8s-jupyter-hub/jupyter.helm-config.yaml#L41-L50) 파일 내의 `auth` 수정 한 후 `jupyter.helm-update.sh` 를 실행합니다.
 
-## Update 
+kubectl apply -f ./k8s.ebs-storage-class.yaml
 
-jupyter hub helm chart 를 업데이트 하려면 아래의 커맨드를 실행합니다. 
+## Update
+
+jupyter hub helm chart 를 업데이트 하려면 아래의 커맨드를 실행합니다.
 
 ```bash
 ./jupyter.helm-update.sh
@@ -44,9 +46,9 @@ jupyter hub helm chart 를 업데이트 하려면 아래의 커맨드를 실행�
 
 ## Setup Github OAuth
 
-- [x] [Github Secret for OAuth Authentication](https://github.com/settings/apps) 생성 
-- [x] [Github Secret for Jupyterhub Authentication](https://zero-to-jupyterhub.readthedocs.io/en/latest/authentication.html) 설정 참고 
-- [x] `jupyter.helm-config.yaml` 파일 내의 `auth.type` and `auth.github` 값 수정 
+- [x] [Github Secret for OAuth Authentication](https://github.com/settings/apps) 생성
+- [x] [Github Secret for Jupyterhub Authentication](https://zero-to-jupyterhub.readthedocs.io/en/latest/authentication.html) 설정 참고
+- [x] `jupyter.helm-config.yaml` 파일 내의 `auth.type` and `auth.github` 값 수정
 
 ```bash
 ./jupyter.helm-update.sh
